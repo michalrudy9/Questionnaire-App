@@ -1,0 +1,13 @@
+.mat-toolbar-style {
+    background-color: rgb(101 163 13);
+    flex-direction: column;
+    height: fit-content;
+    padding: 1rem;
+}
+
+@media screen and (min-width: 640px) {
+    .mat-toolbar-style {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
