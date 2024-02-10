@@ -1,20 +1,18 @@
 <header>
-  <nav>
-    <mat-toolbar class="mat-toolbar-style gap-y-4">
-      <div class="flex items-center gap-x-5">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Receipt icon"
-          fontIcon="receipt"
-        ></mat-icon>
-        <h1>Questionnaire App</h1>
-      </div>
-      <button
-        type="button"
-        class="bg-yellow-500 w-20 h-10 rounded-md hover:bg-yellow-400 active:bg-yellow-400"
-      >
-        Login
-      </button>
-    </mat-toolbar>
-  </nav>
+  <mat-toolbar color="primary">
+    <a routerLink="/" class="flex items-center gap-x-5">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Receipt icon"
+        fontIcon="receipt"
+      ></mat-icon>
+      <h1>Questionnaire App</h1>
+    </a>
+    <nav
+      class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-white flex flex-wrap items-center text-base justify-center"
+    >
+      <button mat-button routerLink="/">Home</button>
+    </nav>
+    <button mat-raised-button color="accent" routerLink="/login">Login</button>
+  </mat-toolbar>
 </header>
