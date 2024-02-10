@@ -7,13 +7,6 @@ export const routes: Routes = [
     component: HomePageComponent,
   },
   {
-    path: 'login',
-    loadComponent: () =>
-      import('../components/login/login.component').then(
-        (c) => c.LoginComponent
-      ),
-  },
-  {
     path: '**',
     redirectTo: '',
   },
