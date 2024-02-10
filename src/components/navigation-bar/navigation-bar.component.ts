@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  selector: 'navigation-bar',
+  selector: 'app-navigation-bar',
   standalone: true,
   imports: [MatIconModule, MatToolbarModule],
   templateUrl: './navigation-bar.component.html',
