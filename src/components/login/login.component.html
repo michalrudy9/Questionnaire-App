@@ -1,7 +1,9 @@
 <app-navigation-bar></app-navigation-bar>
 <section>
   <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-    <div
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
       class="lg:w-2/6 md:w-1/2 md:mx-auto border-purple-700 border-2 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
     >
       <h2 class="text-stone-600 text-lg font-medium title-font mb-5">
@@ -12,26 +14,39 @@
           >E-mail</label
         >
         <input
+          formControlName="email"
           type="email"
           id="email"
           name="email"
           class="w-full bg-purple-600 bg-opacity-20 focus:bg-transparent rounded border border-stone-600 focus:border-purple-500 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
         />
+        <p class="text-xs text-red-600 h-3">
+          @if (!form.get('email')?.valid && form.get('email')?.touched) { Please
+          enter a valid email address! }
+        </p>
       </div>
       <div class="relative mb-4">
         <label for="password" class="leading-7 text-sm text-gray-400"
           >Password</label
         >
         <input
+          formControlName="password"
           type="password"
           id="password"
           name="password"
           class="w-full bg-purple-600 bg-opacity-20 focus:bg-transparent rounded border border-stone-600 focus:border-purple-500 text-base outline-none py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
         />
+        <p class="text-xs text-red-600 h-3">
+          @if (!form.get('password')?.valid && form.get('password')?.touched) {
+          Please enter a password! }
+        </p>
       </div>
-      <button mat-raised-button color="accent" routerLink="/login">
-        Sign in
-      </button>
-    </div>
+      <button mat-raised-button color="accent">Sign in</button>
+      <p class="text-xs text-red-600 h-3 mt-1">
+        @if (errorMessage().message !== '') {
+        {{ errorMessage().message }}
+        }
+      </p>
+    </form>
   </div>
 </section>
