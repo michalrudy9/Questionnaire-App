@@ -7,6 +7,13 @@ export const routes: Routes = [
     component: HomePageComponent,
   },
   {
+    path: 'admin',
+    loadComponent: () =>
+      import('../components/admin-panel/admin-panel.component').then(
+        (c) => c.AdminPanelComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

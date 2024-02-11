@@ -1,0 +1,100 @@
+<div
+  [formGroup]="group"
+  class="flex flex-col p-4 w-3/5 mx-auto mt-2 border-2 border-blue-700 rounded-md"
+>
+  <div class="flex gap-x-4">
+    <mat-form-field>
+      <input matInput formControlName="question" />
+    </mat-form-field>
+
+    <button
+      mat-button
+      [matMenuTriggerFor]="menu"
+      class="flex gap-x-2 items-start"
+    >
+      @switch (selectedInputType()) { @case ('single_choice') {
+      <mat-icon>radio_button_checked</mat-icon>
+      Single choice } @case ('multiple_choice') {
+      <mat-icon>check_box</mat-icon>
+      Multiple choice } @case ('short_answer') {
+      <mat-icon>short_text</mat-icon>
+      Short answer } @case ('scale') {
+      <mat-icon>linear_scale</mat-icon>
+      Scale from 1 to 10 } }
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu>
+      <button mat-menu-item (click)="selectInputType('single_choice')">
+        <mat-icon>radio_button_checked</mat-icon>
+        Single choice
+      </button>
+      <button mat-menu-item (click)="selectInputType('multiple_choice')">
+        <mat-icon>check_box</mat-icon>
+        Multiple choice
+      </button>
+      <button mat-menu-item (click)="selectInputType('short_answer')">
+        <mat-icon>short_text</mat-icon>
+        Short answer
+      </button>
+      <button mat-menu-item (click)="selectInputType('scale')">
+        <mat-icon>linear_scale</mat-icon>
+        Scale from 1 to 10
+      </button>
+    </mat-menu>
+  </div>
+  <div>
+    @switch (selectedInputType()) { @case ('single_choice') {
+    <mat-radio-group
+      aria-label="Select an option"
+      class="flex flex-col items-start"
+    >
+      <mat-radio-button value="1">Option 1</mat-radio-button>
+      <mat-radio-button value="2">Add option</mat-radio-button>
+    </mat-radio-group>
+    } @case ('multiple_choice') {
+    <section class="flex flex-col items-start">
+      <mat-checkbox class="">Option 1</mat-checkbox>
+      <mat-checkbox class="">Add option</mat-checkbox>
+    </section>
+    } @case ('short_answer') {
+    <mat-form-field class="short-answer">
+      <input matInput />
+    </mat-form-field>
+    } @case ('scale') {
+    <div class="flex items-center">
+      <button
+        mat-button
+        [matMenuTriggerFor]="scaleFrom"
+        class="flex items-center"
+      >
+        {{ selectedScaleFrom() }}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #scaleFrom>
+        <button mat-menu-item (click)="selectScaleFrom(0)">0</button>
+        <button mat-menu-item (click)="selectScaleFrom(1)">1</button>
+      </mat-menu>
+      <mat-icon>remove</mat-icon>
+      <button
+        mat-button
+        [matMenuTriggerFor]="scaleTo"
+        class="flex items-center"
+      >
+        {{ selectedScaleTo() }}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #scaleTo>
+        <button mat-menu-item (click)="selectScaleTo(2)">2</button>
+        <button mat-menu-item (click)="selectScaleTo(3)">3</button>
+        <button mat-menu-item (click)="selectScaleTo(4)">4</button>
+        <button mat-menu-item (click)="selectScaleTo(5)">5</button>
+        <button mat-menu-item (click)="selectScaleTo(6)">6</button>
+        <button mat-menu-item (click)="selectScaleTo(7)">7</button>
+        <button mat-menu-item (click)="selectScaleTo(8)">8</button>
+        <button mat-menu-item (click)="selectScaleTo(9)">9</button>
+        <button mat-menu-item (click)="selectScaleTo(10)">10</button>
+      </mat-menu>
+    </div>
+    } }
+  </div>
+</div>
