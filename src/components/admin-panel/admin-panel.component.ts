@@ -1,11 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { QuestionComponent } from '../question/question.component';
-
 
 @Component({
   selector: 'app-admin-panel',
@@ -16,7 +20,7 @@ import { QuestionComponent } from '../question/question.component';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    QuestionComponent
+    QuestionComponent,
   ],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.scss',
@@ -24,7 +28,7 @@ import { QuestionComponent } from '../question/question.component';
 export class AdminPanelComponent {
   private formBuilder = inject(FormBuilder);
   protected questionnaireForm!: FormGroup;
-  
+
   ngOnInit(): void {
     this.questionnaireForm = this.formBuilder.group({
       title: this.formBuilder.control('Form without name'),
@@ -43,5 +47,9 @@ export class AdminPanelComponent {
         question: this.formBuilder.control('Question'),
       })
     );
+  }
+
+  onSubmit() {
+    console.log(this.questionnaireForm.value);
   }
 }
