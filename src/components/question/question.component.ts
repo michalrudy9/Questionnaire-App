@@ -49,8 +49,9 @@ export class QuestionComponent implements OnInit {
     this.selectedScaleTo = signal<number>(5);
 
     this.group.addControl('options', this.formBuilder.array([]));
-    this.group.addControl('scaleFrom', this.formBuilder.control(''));
-    this.group.addControl('scaleTo', this.formBuilder.control(''));
+    this.group.addControl('scaleFrom', this.formBuilder.control(0));
+    this.group.addControl('scaleTo', this.formBuilder.control(0));
+    this.group.addControl('inputType', this.formBuilder.control('single_choice'))
   }
 
   get group(): FormGroup {
@@ -72,6 +73,7 @@ export class QuestionComponent implements OnInit {
   selectInputType(type: string) {
     this.selectedInputType.set(type);
     this.group.addControl('shortAnswer', this.formBuilder.control(''));
+    this.group.get('inputType')?.setValue(this.selectedInputType());
   }
 
   selectScaleFrom(scale: number) {

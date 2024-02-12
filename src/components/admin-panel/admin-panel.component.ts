@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { QuestionComponent } from '../question/question.component';
+import { QuestionnairesService } from '../../services/questionnaires.service';
+import { Questionnary } from '../../models/questionnary.model';
 
 @Component({
   selector: 'app-admin-panel',
@@ -26,6 +28,7 @@ import { QuestionComponent } from '../question/question.component';
   styleUrl: './admin-panel.component.scss',
 })
 export class AdminPanelComponent {
+  private questionnairesService = inject(QuestionnairesService);
   private formBuilder = inject(FormBuilder);
   protected questionnaireForm!: FormGroup;
 
@@ -50,6 +53,8 @@ export class AdminPanelComponent {
   }
 
   onSubmit() {
-    console.log(this.questionnaireForm.value);
+    const formValues = this.questionnaireForm.value;
+    const preparedQuestionnary: Questionnary = formValues;
+    this.questionnairesService.addQuestionnary(preparedQuestionnary);
   }
 }
