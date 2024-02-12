@@ -44,13 +44,15 @@
   </div>
   <div>
     @switch (selectedInputType()) { @case ('single_choice') {
-    <mat-radio-group
-      aria-label="Select an option"
-      class="flex flex-col items-start"
-    >
-      <mat-radio-button value="1">Option 1</mat-radio-button>
-      <mat-radio-button value="2">Add option</mat-radio-button>
-    </mat-radio-group>
+      <ng-container formArrayName="options">
+        @for (option of options.controls; track $index) {
+          <app-option [options]="options" [index]="$index"></app-option>
+        }
+      </ng-container>
+      <div class="flex gap-x-4">
+        <mat-icon color="accent" class="mat-icon-plus" (click)="addAnswer()">add_circle</mat-icon>
+        Add answer
+      </div>
     } @case ('multiple_choice') {
     <section class="flex flex-col items-start">
       <mat-checkbox class="">Option 1</mat-checkbox>
