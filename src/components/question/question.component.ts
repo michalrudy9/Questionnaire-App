@@ -1,6 +1,12 @@
-import { Component, Input, OnInit, inject, signal } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  WritableSignal,
+  inject,
+  signal,
+} from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
@@ -12,6 +18,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { OptionComponent } from '../option/option.component';
+import { ScaleComponent } from '../scale/scale.component';
 
 @Component({
   selector: 'app-question',
@@ -19,12 +26,12 @@ import { OptionComponent } from '../option/option.component';
   imports: [
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
     MatIconModule,
     MatMenuModule,
     MatRadioModule,
     MatCheckboxModule,
     OptionComponent,
+    ScaleComponent,
   ],
   templateUrl: './question.component.html',
   styleUrl: './question.component.scss',
@@ -34,11 +41,16 @@ export class QuestionComponent implements OnInit {
   @Input() index!: number;
   private formBuilder = inject(FormBuilder);
   protected selectedInputType = signal('single_choice');
-  protected selectedScaleFrom = signal(1);
-  protected selectedScaleTo = signal(5);
+  protected selectedScaleFrom!: WritableSignal<number>;
+  protected selectedScaleTo!: WritableSignal<number>;
 
   ngOnInit(): void {
+    this.selectedScaleFrom = signal<number>(1);
+    this.selectedScaleTo = signal<number>(5);
+
     this.group.addControl('options', this.formBuilder.array([]));
+    this.group.addControl('scaleFrom', this.formBuilder.control(''));
+    this.group.addControl('scaleTo', this.formBuilder.control(''));
   }
 
   get group(): FormGroup {
@@ -52,20 +64,23 @@ export class QuestionComponent implements OnInit {
   addAnswer() {
     this.options.push(
       this.formBuilder.group({
-        option: this.formBuilder.control('')
+        option: this.formBuilder.control(''),
       })
     );
   }
 
   selectInputType(type: string) {
     this.selectedInputType.set(type);
+    this.group.addControl('shortAnswer', this.formBuilder.control(''));
   }
 
   selectScaleFrom(scale: number) {
     this.selectedScaleFrom.set(scale);
+    this.group.get('scaleFrom')?.setValue(this.selectedScaleFrom());
   }
 
   selectScaleTo(scale: number) {
     this.selectedScaleTo.set(scale);
+    this.group.get('scaleTo')?.setValue(this.selectedScaleTo());
   }
 }

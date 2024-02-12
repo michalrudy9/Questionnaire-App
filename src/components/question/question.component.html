@@ -44,59 +44,52 @@
   </div>
   <div>
     @switch (selectedInputType()) { @case ('single_choice') {
-      <ng-container formArrayName="options">
-        @for (option of options.controls; track $index) {
-          <app-option [options]="options" [index]="$index"></app-option>
-        }
-      </ng-container>
-      <div class="flex gap-x-4">
-        <mat-icon color="accent" class="mat-icon-plus" (click)="addAnswer()">add_circle</mat-icon>
-        Add answer
-      </div>
+    <ng-container formArrayName="options">
+      @for (option of options.controls; track $index) {
+      <app-option
+        [options]="options"
+        [index]="$index"
+        [inputType]="'radio_button_unchecked'"
+      ></app-option>
+      }
+    </ng-container>
+    <div class="flex gap-x-4">
+      <mat-icon color="accent" class="mat-icon-plus" (click)="addAnswer()"
+        >add_circle</mat-icon
+      >
+      Add answer
+    </div>
     } @case ('multiple_choice') {
-    <section class="flex flex-col items-start">
-      <mat-checkbox class="">Option 1</mat-checkbox>
-      <mat-checkbox class="">Add option</mat-checkbox>
-    </section>
+    <ng-container formArrayName="options">
+      @for (option of options.controls; track $index) {
+      <app-option
+        [options]="options"
+        [index]="$index"
+        [inputType]="'check_box_outline_blank'"
+      ></app-option>
+      }
+    </ng-container>
+    <div class="flex gap-x-4">
+      <mat-icon color="accent" class="mat-icon-plus" (click)="addAnswer()"
+        >add_circle</mat-icon
+      >
+      Add answer
+    </div>
     } @case ('short_answer') {
     <mat-form-field class="short-answer">
-      <input matInput />
+      <input
+        matInput
+        formControlName="shortAnswer"
+        placeholder="Text of short answer for user"
+      />
     </mat-form-field>
     } @case ('scale') {
-    <div class="flex items-center">
-      <button
-        mat-button
-        [matMenuTriggerFor]="scaleFrom"
-        class="flex items-center"
-      >
-        {{ selectedScaleFrom() }}
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      <mat-menu #scaleFrom>
-        <button mat-menu-item (click)="selectScaleFrom(0)">0</button>
-        <button mat-menu-item (click)="selectScaleFrom(1)">1</button>
-      </mat-menu>
-      <mat-icon>remove</mat-icon>
-      <button
-        mat-button
-        [matMenuTriggerFor]="scaleTo"
-        class="flex items-center"
-      >
-        {{ selectedScaleTo() }}
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      <mat-menu #scaleTo>
-        <button mat-menu-item (click)="selectScaleTo(2)">2</button>
-        <button mat-menu-item (click)="selectScaleTo(3)">3</button>
-        <button mat-menu-item (click)="selectScaleTo(4)">4</button>
-        <button mat-menu-item (click)="selectScaleTo(5)">5</button>
-        <button mat-menu-item (click)="selectScaleTo(6)">6</button>
-        <button mat-menu-item (click)="selectScaleTo(7)">7</button>
-        <button mat-menu-item (click)="selectScaleTo(8)">8</button>
-        <button mat-menu-item (click)="selectScaleTo(9)">9</button>
-        <button mat-menu-item (click)="selectScaleTo(10)">10</button>
-      </mat-menu>
-    </div>
+    <app-scale
+      [selectedScaleFrom]="selectedScaleFrom"
+      [selectedScaleTo]="selectedScaleTo"
+      (toOnselectScaleFrom)="selectScaleFrom($event)"
+      (toOnselectScaleTo)="selectScaleTo($event)"
+    ></app-scale>
     } }
   </div>
 </div>

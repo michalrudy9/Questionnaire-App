@@ -1,0 +1,20 @@
+<div class="flex items-center">
+  <button mat-button [matMenuTriggerFor]="scaleFrom" class="flex items-center">
+    {{ selectedScaleFrom() }}
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  <mat-menu #scaleFrom>
+    <button mat-menu-item (click)="toOnScaleFrom(0)">0</button>
+    <button mat-menu-item (click)="toOnScaleFrom(1)">1</button>
+  </mat-menu>
+  <mat-icon>remove</mat-icon>
+  <button mat-button [matMenuTriggerFor]="scaleTo" class="flex items-center">
+    {{ selectedScaleTo() }}
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+  <mat-menu #scaleTo>
+    @for (item of itemAmount; track $index) { @if ($index > 1) {
+    <button mat-menu-item (click)="toOnScaleTo($index)">{{ $index }}</button>
+    } }
+  </mat-menu>
+</div>

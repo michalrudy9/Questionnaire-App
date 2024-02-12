@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 export class OptionComponent {
   @Input() index!: number;
   @Input() options!: FormArray;
+  @Input() inputType!: string;
 
   get group(): FormGroup {
     return this.options.controls[this.index] as FormGroup;
